@@ -1,0 +1,5 @@
+Metric,Ham (Normal),Spam (Trash),Overall/Avg
+Precision,0.98,0.99,0.985
+Recall,1.0,0.88,0.94
+F1-Score,0.99,0.93,0.96
+Support,903.0,131.0,1034.0

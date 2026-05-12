@@ -1,0 +1,36 @@
+2026-05-12 21:04:46,315 - INFO - ========== SVM 模型训练开始 ==========
+2026-05-12 21:04:46,316 - INFO - 加载数据：C:\Users\lenovo\Desktop\A20_SMS_Spam_Detction\data\processed\sms_clean.csv
+2026-05-12 21:04:46,350 - INFO - 有效样本数：5166
+2026-05-12 21:04:46,352 - INFO - 正在提取 TF‑IDF 特征...
+2026-05-12 21:04:46,519 - INFO - 特征矩阵维度：(5166, 5000)
+2026-05-12 21:04:46,524 - INFO - 训练集：4132 条，测试集：1034 条
+2026-05-12 21:04:46,524 - INFO - 开始 GridSearchCV 调参...
+2026-05-12 21:04:53,252 - INFO - 最优参数：{'C': 1}
+2026-05-12 21:04:53,253 - INFO - 最优交叉验证 F1：0.8947
+2026-05-12 21:04:53,263 - INFO - 
+========== 测试集性能 ==========
+2026-05-12 21:04:53,263 - INFO - Accuracy : 0.9816
+2026-05-12 21:04:53,263 - INFO - Precision: 0.9516
+2026-05-12 21:04:53,264 - INFO - Recall   : 0.9008
+2026-05-12 21:04:53,264 - INFO - F1-score : 0.9255
+2026-05-12 21:04:53,264 - INFO - 
+分类报告：
+2026-05-12 21:04:53,274 - INFO -               precision    recall  f1-score   support
+
+         ham       0.99      0.99      0.99       903
+        spam       0.95      0.90      0.93       131
+
+    accuracy                           0.98      1034
+   macro avg       0.97      0.95      0.96      1034
+weighted avg       0.98      0.98      0.98      1034
+
+2026-05-12 21:04:53,275 - INFO - 
+混淆矩阵：
+2026-05-12 21:04:53,275 - INFO -           预测ham  预测spam
+2026-05-12 21:04:53,275 - INFO - 实际ham       897         6
+2026-05-12 21:04:53,275 - INFO - 实际spam       13       118
+2026-05-12 21:04:58,230 - INFO - 混淆矩阵图已保存至：C:\Users\lenovo\Desktop\A20_SMS_Spam_Detction\outputs\figures\cm_svm.png
+2026-05-12 21:04:58,250 - INFO - 性能指标已写入：C:\Users\lenovo\Desktop\A20_SMS_Spam_Detction\outputs\tables\metrics.csv
+2026-05-12 21:04:58,251 - INFO - ========== SVM 训练全部完成 ==========
+2026-05-12 21:04:58,253 - INFO - 模型已保存至：C:\Users\lenovo\Desktop\A20_SMS_Spam_Detction\models\svm_model.pkl
+2026-05-12 21:04:58,361 - INFO - 向量化器已保存至：C:\Users\lenovo\Desktop\A20_SMS_Spam_Detction\models\tfidf_vectorizer_final.pkl

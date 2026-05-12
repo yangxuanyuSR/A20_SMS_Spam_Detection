@@ -1,0 +1,11 @@
+Model: NB
+Training Time: 0.0046s
+----------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.95      1.00      0.98       903
+           1       1.00      0.66      0.80       131
+
+    accuracy                           0.96      1034
+   macro avg       0.98      0.83      0.89      1034
+weighted avg       0.96      0.96      0.95      1034

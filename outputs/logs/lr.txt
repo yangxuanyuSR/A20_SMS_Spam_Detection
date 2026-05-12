@@ -1,0 +1,11 @@
+Model: LR
+Training Time: 0.0310s
+----------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99       903
+           1       0.90      0.94      0.92       131
+
+    accuracy                           0.98      1034
+   macro avg       0.95      0.96      0.95      1034
+weighted avg       0.98      0.98      0.98      1034

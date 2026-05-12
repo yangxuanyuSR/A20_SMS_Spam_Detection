@@ -1,0 +1,23 @@
+=== Naive Bayes Evaluation ===
+seed=42, test_size=0.2
+
+Metrics (positive=spam=1):
+Accuracy:  0.9777
+Precision: 1.0000
+Recall:    0.8244
+F1:        0.9038
+
+Confusion Matrix [[TN FP],[FN TP]]:
+[[902   0]
+ [ 23 108]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9751    1.0000    0.9874       902
+           1     1.0000    0.8244    0.9038       131
+
+    accuracy                         0.9777      1033
+   macro avg     0.9876    0.9122    0.9456      1033
+weighted avg     0.9783    0.9777    0.9768      1033
+

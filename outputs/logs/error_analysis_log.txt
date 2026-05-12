@@ -1,0 +1,26 @@
+SVM 模型误判分析日志
+总测试样本：1034
+误判总数：19
+正常被误判为垃圾：6
+垃圾被误判为正常：13
+
+                                                                                                                                          text true_label pred_label                  reason
+                                                                                                    your daily text from me a favour this time        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
+                                                                             check out choose your babe videos smsshsexnetun fgkslpopw fgkslpo       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                       send a logo ur lover names joined by a heart txt love name name mobno eg love adam eve to yahoo poboxwwq txtno no ads p       spam        ham  垃圾短信被漏判：伪装成日常对话，包含温和词汇
+                                      you will recieve your tone within the next hrs for terms and conditions please see channel u teletext pg       spam        ham  垃圾短信被漏判：伪装成日常对话，包含温和词汇
+babe u want me dont u baby im nasty and have a thing filthyguys fancy a rude time with a sexy bitch how about we go slo n hard txt xxx slomsgs       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                                                                                                                are you free nowcan i call now        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
+                                                                                    missed call alert these numbers called but left no message       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+       datingi have had two of these only started after i sent a text to talk sport radio last week any connection do you think or coincidence       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                                                                                                                                  ringtoneking       spam        ham  垃圾短信被漏判：文本过短，缺乏典型垃圾特征词
+                                                                                                                      midnight at the earliest        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
+      hi its lucy hubby at meetins all day fri i will b alone at hotel u fancy cumin over pls leave msg day lucy x callsminmobsmorelkpoboxhpfl       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+           in the simpsons movie released in july name the band that died at the start of the film agreen day bblue day cred day send a b or c       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                                                                           latest news police station toilet stolen cops have nothing to go on       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                                     i cant speak bcaz mobile have problem i can listen you but you cannt listen my voice so i calls you later        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
+       hi if ur lookin saucy daytime fun wiv busty married woman am free all next week chat now sort time janinexx callsminmobsmorelkpoboxhpfl       spam        ham 垃圾短信被漏判：虽含诱导词，但整体结构易被忽略
+                      can u get phone now i wanna chat set up meet call me now on u can cum here moro luv jane xx callsminmoremobsemspoboxpowa       spam        ham  垃圾短信被漏判：语言隐蔽性强，与正常短信混淆
+                       send a logo ur lover names joined by a heart txt love name name mobno eg love adam eve to yahoo poboxwwq txtno no ads p       spam        ham  垃圾短信被漏判：伪装成日常对话，包含温和词汇
+                                                                             text her if she doesnt reply let me know so i can have her log in        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
+                                                                                                                       on the road so cant txt        ham       spam 正常短信被误判为垃圾：可能包含营销类或异常词汇
