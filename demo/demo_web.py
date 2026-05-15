@@ -5,7 +5,8 @@ import re
 import os
 
 # 加载模型和向量化器
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(CURRENT_DIR) # 这一步很关键：跳出 demo 文件夹
 model = joblib.load(os.path.join(BASE_DIR, "models", "svm_model.pkl"))
 tfidf = joblib.load(os.path.join(BASE_DIR, "models", "tfidf_vectorizer_final.pkl"))
 
@@ -42,4 +43,9 @@ iface = gr.Interface(
 )
 
 if __name__ == "__main__":
-    iface.launch(share=True)   # share=True 会生成一个公网链接
+    iface.launch(
+        share=True,
+        server_name="127.0.0.1",  # 明确指定本地地址
+        server_port=7860,          # 指定端口
+        quiet=False                 # 方便看退出状态
+    )
