@@ -9,7 +9,7 @@
 | **方余文星** | 角色 1 | 数据清洗、数据预处理、误判样本初筛与 EDA 扩展分析 | `src/clean_data.py`, `outputs/error_cases.csv` |
 | **曾欣语** | 角色 2 | 基线模型搭建、特征工程对比实验、最终模型量化评估与可视化汇总 | `src/train_baseline.py`, `outputs/figures/`, `README_week8~12.md` |
 | **杨萱昱** | 角色 3 | SVM 模型训练与调优、最终误判案例分析、模型评估 | `src/train_svm.py`, `src/error_analysis.py`, `outputs/error_cases.csv` |
-| **刘馨喻** | 角色 4 | 项目管理、技术报告撰写、PPT 制作与最终验收 | `reports/final_report.pdf`, `reports/final_ppt.pptx` |
+| **刘馨喻** | 角色 4 | 项目管理、技术报告撰写、PPT 制作与最终验收 | `demo_code.py`,`reports/final_report.pdf`, `reports/final_ppt.pptx` |
 
 ## 3. 项目演进过程
 - **Week 8-9 (起步期)**：完成 5,574 条数据的清洗与去重；对比 Naive Bayes 与 Logistic Regression 模型，建立基线。
