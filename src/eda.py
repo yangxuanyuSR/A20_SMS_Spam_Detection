@@ -18,6 +18,8 @@ from wordcloud import WordCloud
 from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
+import os
+from matplotlib import ticker
 
 SEED = 42
 
@@ -46,12 +48,17 @@ def tokenize(text):
 def plot_top_words(counter, title, save_path, n=20):
     top = counter.most_common(n)
     words, counts = zip(*top[::-1])
-    plt.figure(figsize=(8, 6))
-    plt.barh(words, counts, color='#2c7fb8')
-    plt.xlabel('Frequency')
-    plt.title(title)
+    plt.figure(figsize=(5, 5)) 
+    plt.barh(words, counts, color='steelblue', height=0.6)
+    plt.xlabel('Frequency', fontweight='bold')
+    plt.title(title, fontweight='bold')
+    # 刻度数字与刻度标签全部加粗
+    plt.xticks(fontweight='bold')
+    plt.yticks(fontweight='bold')
+    plt.gca().xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}')) # 千分位逗号
+    sns.despine()
     plt.tight_layout()
-    plt.savefig(save_path, dpi=300)
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
     print(f"已保存: {save_path}")
 
@@ -60,12 +67,16 @@ def plot_tfidf_words(tfidf_scores, feature_names, title, save_path, n=20):
     top_indices = tfidf_scores.argsort()[-n:][::-1]
     top_words = [feature_names[i] for i in top_indices]
     top_scores = tfidf_scores[top_indices]
-    plt.figure(figsize=(8, 6))
-    plt.barh(top_words[::-1], top_scores[::-1], color='#d95f02')
-    plt.xlabel('TF-IDF Score')
-    plt.title(title)
+    plt.figure(figsize=(5, 5)) # 改为正方形
+    plt.barh(top_words[::-1], top_scores[::-1], color='#d95f02',height=0.6)
+    plt.xlabel('TF-IDF Score', fontweight='bold')
+    plt.title(title, fontweight='bold')
+    plt.xticks(fontweight='bold')
+    plt.yticks(fontweight='bold')
+    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f')) # 保留3位小数
+    sns.despine() # IEEE无边框
     plt.tight_layout()
-    plt.savefig(save_path, dpi=300)
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
     print(f"已保存: {save_path}")
 
