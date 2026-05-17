@@ -36,7 +36,7 @@
 ```bash
 cd src
 python eda.py
-
+```
 
 ## 第9周 基线模型训练（角色2）交付物
 
@@ -85,7 +85,7 @@ python eda.py
 ### 运行方式
 ```bash
 python src/evaluate.py
-
+```
 
 
 
