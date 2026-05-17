@@ -69,7 +69,7 @@ python eda.py
 3. **向量化参数**：
    - `max_features=5000`: 选取权重最高的 5000 个词汇。
    - `min_df=2`: 过滤掉在数据集中仅出现过一次的生僻词，减少噪声。
----
+
 
 ##角色3交付物（数据划分脚本train/test）
 
@@ -87,7 +87,9 @@ python eda.py
 3. 训练集 spam： 522 测试集spam： 131
 
 ###运行方式
-- 清洗 ` python .\src\clean_data.py`
-- EDA `python .\src\eda.py`
-- 特征提取 `python .\src\extract_features.py`
-- 划分train/test `python .\src\train_baseline.py`
+```bash
+python .\src\clean_data.py        #清洗
+python .\src\eda.py               #EDA
+python .\src\extract_features.py  #特征提取
+python .\src\train_baseline.py    #划分train/test
+```
