@@ -39,7 +39,7 @@
 ```bash
 cd src
 python eda.py
-
+```
 ## 角色 2 交付物 
 
 ### 1. 核心代码与实验文件
@@ -91,3 +91,4 @@ python eda.py
 ```bash
 cd src
 python train_svm.py
+```
