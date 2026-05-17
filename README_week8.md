@@ -69,11 +69,10 @@ python eda.py
 3. **向量化参数**：
    - `max_features=5000`: 选取权重最高的 5000 个词汇。
    - `min_df=2`: 过滤掉在数据集中仅出现过一次的生僻词，减少噪声。
+---
+## 角色3交付物（数据划分脚本train/test）
 
-
-##角色3交付物（数据划分脚本train/test）
-
-###1.划分脚本
+### 1.划分脚本
 - 文件：`src/train_baseline.py`
 - 功能
  - 从 `data\processed\sms_clean.csv` 读取数据（优先使用clean_message）
@@ -81,12 +80,12 @@ python eda.py
  - 使用 stratify=y 分层抽样，保证训练/测试集类别比例一致
  - 运行后在终端输出：样本量、训练/测试集大小、各自类别分布
 
-###2.输出
+### 2.输出
 1. 总样本数： 5166
 2. 训练集： 4132 / 训练集： 1034
 3. 训练集 spam： 522 测试集spam： 131
 
-###运行方式
+### 运行方式
 ```bash
 python .\src\clean_data.py        #清洗
 python .\src\eda.py               #EDA
