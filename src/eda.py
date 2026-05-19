@@ -52,9 +52,11 @@ def plot_top_words(counter, title, save_path, n=20):
     plt.barh(words, counts, color='steelblue', height=0.6)
     plt.xlabel('Frequency', fontweight='bold')
     plt.title(title, fontweight='bold')
+    
     plt.xticks(fontweight='bold')
     plt.yticks(fontweight='bold')
     plt.gca().xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}')) 
+    
     sns.despine()
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
@@ -66,13 +68,16 @@ def plot_tfidf_words(tfidf_scores, feature_names, title, save_path, n=20):
     top_indices = tfidf_scores.argsort()[-n:][::-1]
     top_words = [feature_names[i] for i in top_indices]
     top_scores = tfidf_scores[top_indices]
+    
     plt.figure(figsize=(5, 5)) 
     plt.barh(top_words[::-1], top_scores[::-1], color='#d95f02',height=0.6)
     plt.xlabel('TF-IDF Score', fontweight='bold')
     plt.title(title, fontweight='bold')
+    
     plt.xticks(fontweight='bold')
     plt.yticks(fontweight='bold')
     plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f')) 
+    
     sns.despine()
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
@@ -126,7 +131,6 @@ def main():
     df['message_length'] = df['message'].astype(str).apply(len)
     plt.figure(figsize=(5, 5))
     ax2 = sns.histplot(data=df, x='message_length', hue='label', bins=50, kde=True, palette='deep')
-    ax = sns.histplot(data=df, x='message_length', hue='label', bins=50, kde=True, palette='viridis')
     plt.title('Message Length Distribution by Label', fontweight='bold')
     plt.xlabel('Message Length (characters)', fontweight='bold')
     plt.ylabel('Frequency', fontweight='bold')
@@ -234,6 +238,44 @@ def main():
                      'outputs/figures/tfidf_spam.png')
 
     print("\n===== 所有第11周扩展EDA图表已生成 =====")
+    
+    # ===== 模型性能指标对比条形图 =====
+    if os.path.exists(metrics_csv_path):
+        df_metrics = pd.read_csv(metrics_csv_path)
+        model_col = df_metrics.columns[0] 
+        df_metrics_long = pd.melt(df_metrics, id_vars=[model_col], var_name='Metric', value_name='Value')
+
+        plt.figure(figsize=(5, 5))
+        ax_model = sns.barplot(
+            data=df_metrics_long, 
+            x='Metric', 
+            y='Value', 
+            hue=model_col, 
+            palette='deep',
+            edgecolor='black', 
+            linewidth=0.6
+        )
+        plt.title('Model Performance Comparison', pad=15, fontweight='bold')
+        plt.xlabel('Evaluation Metrics', fontweight='bold')
+        plt.ylabel('Score', fontweight='bold')
+        plt.ylim(0.7, 1.02)
+        plt.xticks(fontweight='bold')
+        plt.yticks(fontweight='bold')
+
+        # 图例核心优化：移动至下方居中且不要边框
+        plt.legend(
+            loc='upper center', 
+            bbox_to_anchor=(0.5, -0.15), 
+            ncol=3,            
+            frameon=False,     
+            columnspacing=1.0  
+        )
+        sns.despine()
+        plt.savefig('outputs/figures/model_comparison_chart.png', dpi=300, bbox_inches='tight')
+        plt.show()
+        print("模型对比条形图已保存: model_comparison_chart.png")
+    else:
+        print("警告: 未检测到 metrics_comparison.csv，跳过模型对比图绘制。")
 
 if __name__ == "__main__":
     main()
