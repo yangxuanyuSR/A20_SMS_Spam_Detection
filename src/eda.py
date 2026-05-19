@@ -52,10 +52,9 @@ def plot_top_words(counter, title, save_path, n=20):
     plt.barh(words, counts, color='steelblue', height=0.6)
     plt.xlabel('Frequency', fontweight='bold')
     plt.title(title, fontweight='bold')
-    # 刻度数字与刻度标签全部加粗
     plt.xticks(fontweight='bold')
     plt.yticks(fontweight='bold')
-    plt.gca().xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}')) # 千分位逗号
+    plt.gca().xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}')) 
     sns.despine()
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
@@ -67,14 +66,14 @@ def plot_tfidf_words(tfidf_scores, feature_names, title, save_path, n=20):
     top_indices = tfidf_scores.argsort()[-n:][::-1]
     top_words = [feature_names[i] for i in top_indices]
     top_scores = tfidf_scores[top_indices]
-    plt.figure(figsize=(5, 5)) # 改为正方形
+    plt.figure(figsize=(5, 5)) 
     plt.barh(top_words[::-1], top_scores[::-1], color='#d95f02',height=0.6)
     plt.xlabel('TF-IDF Score', fontweight='bold')
     plt.title(title, fontweight='bold')
     plt.xticks(fontweight='bold')
     plt.yticks(fontweight='bold')
-    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f')) # 保留3位小数
-    sns.despine() # IEEE无边框
+    plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.3f')) 
+    sns.despine()
     plt.tight_layout()
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.show()
@@ -82,40 +81,80 @@ def plot_tfidf_words(tfidf_scores, feature_names, title, save_path, n=20):
 
 def main():
     df = pd.read_csv('data/processed/sms_clean.csv')
-
+    # 基准目录配置：基于 src 文件夹向上返一级进入大文件夹
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
+    # 动态拼接所有输入输出路径，防止因运行路径不同而报错
+    metrics_csv_path = os.path.join(base_dir, 'outputs', 'tables', 'metrics_comparison.csv')
+    figures_dir = os.path.join(base_dir, 'outputs', 'figures')
+    os.makedirs(figures_dir, exist_ok=True)
+    # 统一设置 IEEE 字体与五号字 (10.5 磅)
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.serif': ['Times New Roman', 'SimSun'],
+        'font.size': 10.5, 'axes.labelsize': 10.5, 'axes.titlesize': 10.5,
+        'xtick.labelsize': 10.5, 'ytick.labelsize': 10.5,
+        'axes.linewidth': 0.8, 
+        'xtick.major.width': 0.8, 'ytick.major.width': 0.8,
+        'axes.labelweight': 'bold',
+        'axes.titleweight': 'bold',
+        'font.weight': 'bold'
+    })
+    # 定义千分位格式化工具
+    comma_fmt = ticker.StrMethodFormatter('{x:,.0f}')
+    
     # ===== 图表1：类别分布 =====
-    plt.figure(figsize=(6, 4))
-    sns.countplot(x='label', data=df, palette='viridis')
-    plt.title('Class Distribution (Ham vs Spam)')
-    plt.xlabel('Label')
-    plt.ylabel('Count')
-    for i, count in enumerate(df['label'].value_counts()):
-        plt.text(i, count + 30, str(count), ha='center')
+    plt.figure(figsize=(5, 5))
+    ax1 = sns.countplot(x='label', data=df, palette='deep')
+    plt.title('Class Distribution (Ham vs Spam)', fontweight='bold')
+    plt.xlabel('Label', fontweight='bold')
+    plt.ylabel('Count', fontweight='bold')
+    plt.xticks(fontweight='bold')
+    plt.yticks(fontweight='bold')
+    ax1.yaxis.set_major_formatter(comma_fmt)
+    max_val = df['label'].value_counts().max()
+    max_val = df['label'].value_counts().max()
+    for i, count in enumerate(df['label'].value_counts().sort_index()):
+        plt.text(i, count + (max_val * 0.01), f"{count:,}", ha='center', fontsize=9)
+    sns.despine()
     plt.tight_layout()
-    plt.savefig('outputs/figures/class_dist.png', dpi=300)
+    plt.savefig('outputs/figures/class_dist.png', dpi=300, bbox_inches='tight')
     plt.show()
     print("图1已保存: class_dist.png")
 
     # ===== 图表2：文本长度分布直方图 =====
     df['message_length'] = df['message'].astype(str).apply(len)
-    plt.figure(figsize=(10, 5))
-    sns.histplot(data=df, x='message_length', hue='label', bins=50, kde=True, palette='viridis')
-    plt.title('Message Length Distribution by Label')
-    plt.xlabel('Message Length (characters)')
-    plt.ylabel('Frequency')
+    plt.figure(figsize=(5, 5))
+    ax2 = sns.histplot(data=df, x='message_length', hue='label', bins=50, kde=True, palette='deep')
+    ax = sns.histplot(data=df, x='message_length', hue='label', bins=50, kde=True, palette='viridis')
+    plt.title('Message Length Distribution by Label', fontweight='bold')
+    plt.xlabel('Message Length (characters)', fontweight='bold')
+    plt.ylabel('Frequency', fontweight='bold')
+    plt.xticks(fontweight='bold')
+    plt.yticks(fontweight='bold')
     plt.xlim(0, 500)
+    ax2.yaxis.set_major_formatter(comma_fmt)
+    legend = ax2.get_legend()
+    if legend:
+        legend.set_frame_on(False)
+    sns.despine()
     plt.tight_layout()
-    plt.savefig('outputs/figures/length_dist.png', dpi=300)
+    plt.savefig('outputs/figures/length_dist.png', dpi=300, bbox_inches='tight')
     plt.show()
     print("图2已保存: length_dist.png")
 
     # ===== 图表3：长度箱线图（新增） =====
-    plt.figure(figsize=(6, 5))
-    sns.boxplot(x='label', y='message_length', data=df, palette='viridis')
-    plt.title('Message Length Boxplot by Label')
-    plt.ylabel('Message Length (characters)')
+    plt.figure(figsize=(5, 5))
+    ax3 = sns.boxplot(x='label', y='message_length', data=df, palette='deep', width=0.5)
+    plt.title('Message Length Boxplot by Label', fontweight='bold')
+    plt.xlabel('Label', fontweight='bold')
+    plt.ylabel('Message Length (characters)', fontweight='bold')
+    plt.xticks(fontweight='bold')
+    plt.yticks(fontweight='bold')
+    ax3.yaxis.set_major_formatter(comma_fmt)
+    sns.despine()
     plt.tight_layout()
-    plt.savefig('outputs/figures/length_boxplot.png', dpi=300)
+    plt.savefig('outputs/figures/length_boxplot.png', dpi=300, bbox_inches='tight')
     plt.show()
     print("图3已保存: length_boxplot.png")
 
